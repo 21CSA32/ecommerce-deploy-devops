@@ -1,0 +1,21 @@
+- name: Import MongoDB public GPG key
+  apt_key:
+    url: https://www.mongodb.org/static/pgp/server-4.4.asc
+    state: present
+
+- name: Create MongoDB source list
+  apt_repository:
+    repo: deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse
+    state: present
+
+- name: Install MongoDB
+  apt:
+    name: mongodb-org
+    update_cache: yes
+    state: present
+
+- name: Start and enable MongoDB
+  systemd:
+    name: mongod
+    enabled: yes
+    state: started

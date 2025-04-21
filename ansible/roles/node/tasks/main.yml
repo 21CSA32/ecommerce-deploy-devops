@@ -1,0 +1,19 @@
+- name: Install Node.js
+  apt:
+    name: nodejs
+    state: present
+  become: yes
+
+- name: Install npm
+  apt:
+    name: npm
+    state: present
+
+- name: Clone your app
+  git:
+    repo: https://github.com/21CSA32/ecommerce-app.git
+    dest: /home/ubuntu/ecommerce-app
+
+- name: Install dependencies
+  npm:
+    path: /home/ubuntu/ecommerce-app
